@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Graduation Projects 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f4;
+    --color-background-info: #e6f1fb;
+    --color-background-danger: #fcebeb;
+    --color-background-success: #eaf3de;
+    --color-background-warning: #faeeda;
+    --color-text-primary: #1a1a18;
+    --color-text-secondary: #5f5e5a;
+    --color-text-tertiary: #888780;
+    --color-text-info: #185fa5;
+    --color-text-danger: #a32d2d;
+    --color-text-success: #3b6d11;
+    --color-text-warning: #854f0b;
+    --color-border-tertiary: rgba(0,0,0,0.12);
+    --color-border-secondary: rgba(0,0,0,0.22);
+    --color-border-info: #378add;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background-primary: #1e1e1c;
+      --color-background-secondary: #2c2c2a;
+      --color-background-info: #042c53;
+      --color-background-danger: #501313;
+      --color-background-success: #173404;
+      --color-background-warning: #412402;
+      --color-text-primary: #e8e6df;
+      --color-text-secondary: #b4b2a9;
+      --color-text-tertiary: #888780;
+      --color-text-info: #85b7eb;
+      --color-text-danger: #f09595;
+      --color-text-success: #97c459;
+      --color-text-warning: #ef9f27;
+      --color-border-tertiary: rgba(255,255,255,0.12);
+      --color-border-secondary: rgba(255,255,255,0.22);
+      --color-border-info: #378add;
+    }
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    padding: 24px;
+  }
+  h1.page-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--color-text-primary);
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+  }
+  .app {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 700px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    background: var(--color-background-primary);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .sidebar {
+    background: var(--color-background-secondary);
+    border-right: 0.5px solid var(--color-border-tertiary);
+    overflow-y: auto;
+    max-height: 700px;
+    padding: 10px 6px;
+  }
+  .sidebar-hdr {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--color-text-tertiary);
+    padding: 4px 8px 10px;
+  }
+  .r-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: var(--border-radius-md);
+    padding: 7px 9px;
+    cursor: pointer;
+    font-size: 11.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.35;
+    transition: background .12s;
+    margin-bottom: 1px;
+  }
+  .r-btn:hover { background: var(--color-background-primary); color: var(--color-text-primary); }
+  .r-btn.active {
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+    font-weight: 500;
+    padding-left: 11px;
+    border-left: 2px solid var(--color-text-info);
+  }
+  .r-num { font-size: 10px; color: var(--color-text-tertiary); display: block; margin-bottom: 1px; }
+  .r-tags { font-size: 10px; color: var(--color-text-tertiary); display: block; margin-top: 2px; }
+  .main { overflow-y: auto; max-height: 700px; padding: 22px 24px; }
+  .repo-header { margin-bottom: 18px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+  .b-devops { background: var(--color-background-info); color: var(--color-text-info); }
+  .b-devsec { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .b-mlops { background: var(--color-background-success); color: var(--color-text-success); }
+  .b-gitops { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .b-obs { background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+  .proj-title { font-size: 18px; font-weight: 500; margin-bottom: 3px; }
+  .proj-subtitle { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 16px; }
+  .tabs { display: flex; gap: 2px; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 16px; flex-wrap: wrap; }
+  .tab {
+    background: none; border: none; padding: 5px 11px; font-size: 12px;
+    cursor: pointer; color: var(--color-text-secondary);
+    border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: color .12s;
+  }
+  .tab:hover { color: var(--color-text-primary); }
+  .tab.on { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); font-weight: 500; }
+  .tc { display: none; } .tc.on { display: block; }
+  .lbl {
+    font-size: 10px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--color-text-tertiary);
+    margin: 14px 0 6px;
+  }
+  .lbl:first-child { margin-top: 0; }
+  .card {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 11px 13px; margin-bottom: 7px;
+    font-size: 13px; line-height: 1.6; color: var(--color-text-secondary);
+  }
+  .card strong { color: var(--color-text-primary); font-weight: 500; }
+  .pill-wrap { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .pill {
+    font-size: 11.5px; padding: 3px 9px; border-radius: 20px;
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-secondary);
+  }
+  .step { display: flex; gap: 9px; margin-bottom: 7px; align-items: flex-start; }
+  .sn {
+    min-width: 20px; height: 20px; border-radius: 50%;
+    background: var(--color-background-info); color: var(--color-text-info);
+    font-size: 10px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .st { font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+  .st strong { color: var(--color-text-primary); font-weight: 500; }
+  .hl {
+    border-left: 3px solid var(--color-border-info);
+    padding: 9px 12px;
+    background: var(--color-background-info);
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    margin-bottom: 8px;
+  }
+  .hl p { font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
+  .hl strong { color: var(--color-text-primary); font-weight: 500; }
+  .week-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .wcard {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px;
+    border: 0.5px solid var(--color-border-tertiary);
+  }
+  .wcard-ttl { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+  .wcard p { font-size: 12.5px; line-height: 1.55; color: var(--color-text-secondary); }
+  .top-badge {
+    display: inline-block; font-size: 10px; padding: 2px 8px;
+    border-radius: 20px; background: var(--color-background-success);
+    color: var(--color-text-success); font-weight: 500;
+    margin-left: 8px; vertical-align: middle;
+  }
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .app { grid-template-columns: 1fr; }
+    .sidebar { display: flex; overflow-x: auto; max-height: none; gap: 4px; }
+    .r-btn { white-space: nowrap; min-width: 130px; }
+    .week-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<h1 class="page-title">10 Enterprise DevOps / DevSecOps / MLOps Graduation Projects — 2026</h1>
+<p class="page-subtitle">Enterprise-grade, production-like project blueprints. Click a project → explore Architecture, CI/CD, MLOps, Monitoring, Repos, and Interview Impact.</p>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-hdr">10 Projects</div>
+    <div id="rlist"></div>
+  </div>
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const projects=[
+{
+  num:"01",title:"Netflix-Grade Video Streaming Platform",
+  subtitle:"A production-like VOD platform with microservices, ML-driven recommendations, chaos engineering, and full observability — modeled after Netflix OSS.",
+  tags:["DevOps","DevSecOps","MLOps","Observability","GitOps"],
+  usecase:"Simulate a real OTT streaming backend: user auth, video ingestion, transcoding jobs, CDN delivery, and personalized ML recommendations. The system handles 10k+ simulated concurrent users using load testing.",
+  arch:[
+    {layer:"Edge & Ingress",detail:"Nginx Ingress + Istio service mesh. TLS termination, rate limiting, mTLS between services."},
+    {layer:"Core Microservices",detail:"8 FastAPI services: auth-service, catalog-service, streaming-service, recommendation-service, user-service, notification-service, analytics-service, admin-service."},
+    {layer:"Async & Events",detail:"Kafka for video-uploaded, user-watch-event, recommendation-trigger topics. Faust for real-time processing."},
+    {layer:"ML Layer",detail:"Recommendation model (LightFM) trained via Airflow DAGs, served via FastAPI+MLflow. Kubeflow Pipelines for training orchestration."},
+    {layer:"Data & Storage",detail:"PostgreSQL (user/catalog data), Redis (session cache), MinIO (video chunks + model artifacts)."},
+    {layer:"Observability",detail:"Prometheus + Grafana dashboards. Loki for log aggregation. Jaeger via OpenTelemetry for distributed tracing. Falco for runtime security."},
+    {layer:"Security",detail:"HashiCorp Vault for secrets. Trivy image scanning. SonarQube SAST. OPA Gatekeeper for K8s admission control. Kyverno policies."},
+    {layer:"GitOps & IaC",detail:"ArgoCD multi-app management. Terraform for AWS EKS + RDS + ElastiCache. Helm charts per service. FluxCD image automation."}
+  ],
+  cicd:["Code push triggers GitHub Actions","Unit + integration tests (pytest)","SonarQube SAST scan — fail on Critical","Trivy container image scan","OPA conftest policy check on Helm charts","Build & push image to ECR","Helm chart version bump","ArgoCD sync to staging namespace","Smoke tests + load test (k6)","Manual gate → ArgoCD promote to prod","Canary deployment via Argo Rollouts (10→50→100%)","Falco runtime alert baseline verification"],
+  mlops:["Raw watch events → Kafka → Spark Structured Streaming → feature store (Redis)","Weekly Airflow DAG: retrain LightFM model on new interaction data","MLflow tracking: log params, metrics, artifacts","Model registry: Staging → Production promotion gated by accuracy threshold","FastAPI model server: /recommend endpoint with shadow mode A/B","Evidently AI: data drift detection, alert to Slack via Prometheus alerting","Kubeflow pipeline: feature engineering → training → evaluation → registration"],
+  monitoring:"Grafana dashboards: streaming error rate, recommendation latency, Kafka consumer lag, ML model accuracy over time. Alertmanager → PagerDuty/Slack. OpenTelemetry collector sidecar on all pods. Loki LogQL queries for error clustering.",
+  repos:["GoogleCloudPlatform/microservices-demo (⭐17.5k)","Netflix/Hystrix (⭐23k) — resilience patterns","Kubeflow/pipelines (⭐3.5k)","argoproj/argo-rollouts (⭐2.7k)","grafana/loki (⭐24k)"],
+  scaling:"HPA on all FastAPI pods (CPU+custom Kafka lag metric). KEDA for Kafka consumer autoscaling. Spot instances for Airflow workers via Karpenter. Redis cluster for session scale.",
+  dr:"Multi-AZ EKS. RDS Multi-AZ with automated failover. MinIO replicated across zones. ArgoCD self-heal enabled. Velero for cluster state backup. RTO: 15min, RPO: 1hr.",
+  resume:"Shows full-stack platform engineering: ML serving + chaos engineering + canary deployments + GitOps. Maps to Senior Platform/MLOps Engineer roles at Netflix, Spotify, Twitch.",
+  demo:"Run k6 load test live. Show ArgoCD canary progression. Trigger Falco alert. Demo Grafana dashboard under load. Show MLflow model lineage.",
+  finops:"Karpenter spot-first node pools. AWS Cost Explorer tags per service. Kubecost dashboard showing cost per namespace. Idle replica detection via KEDA."
+},
+{
+  num:"02",title:"Fintech Fraud Detection MLOps System",
+  subtitle:"A real-time payment fraud detection platform with streaming ML inference, model drift monitoring, full audit trails, and zero-trust security — modeled after Stripe/PayPal scale.",
+  tags:["MLOps","DevSecOps","Observability","GitOps","DevOps"],
+  usecase:"Simulate a payment processing backend that scores every transaction in <100ms for fraud probability. Includes model retraining pipelines, drift detection, full regulatory audit logging, and SOC2-like security controls.",
+  arch:[
+    {layer:"Transaction Ingestion",detail:"FastAPI payment gateway → Kafka topic (transactions-raw). Producers use exactly-once semantics. Schema Registry enforces Avro schemas."},
+    {layer:"Real-Time Inference",detail:"Faust stream processor consumes Kafka, calls ML inference service (XGBoost model via FastAPI). Fraud score written back to Kafka (transactions-scored)."},
+    {layer:"ML Pipeline",detail:"Airflow orchestrates: data extraction from PostgreSQL → feature engineering → XGBoost training → MLflow tracking → model registration → canary shadow deployment."},
+    {layer:"Feature Store",detail:"Redis for online features (user spend velocity, merchant risk score). Airflow batch jobs refresh offline features in PostgreSQL materialized views."},
+    {layer:"Audit & Compliance",detail:"All decisions logged immutably to PostgreSQL with OpenTelemetry trace IDs. Loki stores raw logs. Vault audit log enabled. Immutable S3 bucket for regulatory archive."},
+    {layer:"Security (Zero Trust)",detail:"Vault PKI for mTLS. OPA policies enforce: no plaintext secrets, all images from approved registry, no privileged containers. Falco detects anomalous syscalls. Trivy+SonarQube in CI."},
+    {layer:"Observability",detail:"Custom Prometheus metrics: fraud_score_histogram, inference_latency_p99, model_drift_score. Grafana dashboards. Evidently AI drift reports published as Grafana annotations."}
+  ],
+  cicd:["Push to feature branch → GitHub Actions","pytest + data validation tests (Great Expectations)","SonarQube SAST (security hotspot check)","Trivy image scan (CRITICAL = fail)","OPA conftest: Vault secret injection required","Build ML inference image → ECR","Deploy to staging: shadow mode (log-only, no block)","Champion/Challenger A/B test: 5% traffic to new model","Precision/Recall gate: challenger must beat champion","Promote to production via ArgoCD + MLflow Registry","Automated rollback if p99 latency > 150ms"],
+  mlops:["Airflow DAG: daily feature refresh from transactional DB","Weekly model retrain: XGBoost on last 90 days of labeled data","MLflow: log AUC, precision@k, F1, feature importance","Evidently AI: data drift (PSI score), concept drift (prediction drift)","Drift alert → Slack → triggers immediate retrain DAG","Shadow deployment: new model scores in parallel, no action taken","Champion/Challenger promotion: automated if AUC improves >1%","Model explainability: SHAP values logged per prediction for audit"],
+  monitoring:"Grafana: real-time fraud score distribution, model drift score trend, Kafka consumer lag (SLA: <5s end-to-end), inference latency p50/p99. Alert on: drift PSI>0.2, latency>100ms, error rate>0.1%. PagerDuty integration.",
+  repos:["great-expectations/great-expectations (⭐10k)","evidentlyai/evidently (⭐5k)","feast-dev/feast (⭐5.5k)","apache/airflow (⭐38k)","mlflow/mlflow (⭐19.5k)"],
+  scaling:"KEDA scales inference pods on Kafka consumer lag. Horizontal sharding of Kafka partitions. Redis Cluster for feature store. Read replicas for PostgreSQL reporting queries.",
+  dr:"Kafka replication factor 3. PostgreSQL streaming replication + PITR. MLflow artifact store on S3 with versioning. ArgoCD self-heal. Model rollback in <2min via MLflow Registry. RTO: 5min.",
+  resume:"Directly maps to: ML Engineer, MLOps Engineer, Data Platform Engineer at fintech companies (Stripe, Revolut, Wise, Klarna). Demonstrates: real-time ML, drift monitoring, compliance engineering.",
+  demo:"Show live transaction stream in Kafka UI. Inject synthetic fraud burst. Watch Grafana alert fire. Trigger drift detection. Show Evidently report. Demonstrate shadow deployment in ArgoCD.",
+  finops:"Reserved instances for PostgreSQL/Redis. Spot for Airflow workers. Cost per model inference tracked via custom Prometheus metric. Kubecost: cost per ML namespace."
+},
+{
+  num:"03",title:"Internal Developer Platform (IDP)",
+  subtitle:"A Backstage-powered Internal Developer Platform with golden path templates, self-service K8s provisioning, integrated security scanning, cost visibility, and full GitOps — modeled after Spotify Backstage.",
+  tags:["DevOps","GitOps","DevSecOps","Observability"],
+  usecase:"Build the platform that platform engineers actually build at top companies. Developers self-serve: create new microservices, provision databases, deploy to K8s — all via a UI that enforces security and cost policies automatically through GitOps.",
+  arch:[
+    {layer:"Portal (Backstage)",detail:"Spotify Backstage UI: service catalog, tech docs, software templates (golden paths), cost visibility plugin, security posture plugin."},
+    {layer:"Golden Path Templates",detail:"Scaffolder templates: FastAPI service template (pre-wired Dockerfile, Helm chart, GitHub Actions CI, SonarQube, Trivy, Prometheus metrics). One command = production-ready repo."},
+    {layer:"Self-Service Provisioning",detail:"Atlantis: developers submit PR to infra repo → Atlantis plans → approver merges → Terraform applies. Provisions: RDS, ElastiCache, S3 buckets, IAM roles."},
+    {layer:"GitOps Engine",detail:"ArgoCD: ApplicationSets auto-create ArgoCD apps for every new service repo following the golden path pattern. FluxCD for cluster bootstrapping."},
+    {layer:"Policy Enforcement",detail:"OPA Gatekeeper: all new deployments must have resource limits, liveness probes, non-root user. Kyverno: auto-inject Vault agent sidecar, enforce image registry allowlist."},
+    {layer:"Observability Integration",detail:"Every scaffolded service gets: pre-built Grafana dashboard, Loki log labels, OpenTelemetry auto-instrumentation via admission webhook. Zero config for developers."},
+    {layer:"Security Posture",detail:"Backstage security plugin: shows Trivy CVE count, SonarQube rating, OPA policy violations per service. Falco runtime alerts linked to service catalog entry."}
+  ],
+  cicd:["Developer uses Backstage scaffolder → new repo created","GitHub Actions golden path CI: test → SAST → image scan → build","OPA conftest checks Helm chart policies","Helm chart pushed to OCI registry (ECR)","ArgoCD ApplicationSet detects new repo → creates ArgoCD app","ArgoCD syncs to dev namespace automatically","PR to main → staging sync, manual gate → prod","Atlantis for any infra PRs (Terraform plan/apply as PR comments)","Backstage catalog auto-populated via GitHub discovery plugin"],
+  mlops:["ML team golden path template: Jupyter → FastAPI model server → Helm chart","MLflow integrated into Backstage catalog as software entity","Airflow DAG templates in scaffolder for ML pipelines","Model serving golden path: FastAPI + Gunicorn + Prometheus metrics out of box","GPU node pool provisioned via self-service Terraform template"],
+  monitoring:"Backstage plugins: cost per service (Kubecost), security score (Trivy+OPA), on-call status (PagerDuty), deployment frequency (DORA metrics via GitHub). Central Grafana: platform health, ArgoCD sync status, policy violation rate.",
+  repos:["backstage/backstage (⭐29k)","runatlantis/atlantis (⭐7.7k)","argoproj/argo-cd (⭐18k)","open-policy-agent/gatekeeper (⭐3.6k)","kyverno/kyverno (⭐5.7k)"],
+  scaling:"Backstage runs as K8s deployment. Catalog backed by PostgreSQL. ArgoCD scales with ApplicationSets. Policy webhook scales horizontally. Multi-cluster ArgoCD for org-wide platform.",
+  dr:"GitOps as source of truth: entire cluster state reconstructed from Git. Velero backup. ArgoCD self-heal. Backstage catalog backed by PostgreSQL with streaming replication.",
+  resume:"Most in-demand project for Platform Engineer / DevOps roles in 2025-2026. Shows: developer experience, policy automation, GitOps, IaC at scale. Directly mirrors what Spotify, Airbnb, and Zalando built.",
+  demo:"Live demo: run Backstage scaffolder template → show generated repo → ArgoCD auto-deploys → Grafana dashboard auto-appears → Kubecost shows cost → OPA rejects non-compliant deploy.",
+  finops:"Kubecost plugin in Backstage shows real cost per service/team. Chargeback reports. Idle resource detection. Budget alerts in Backstage."
+},
+{
+  num:"04",title:"Uber-Like Ride-Hailing Platform",
+  subtitle:"A geo-aware, event-driven ride-hailing backend with real-time matching ML, dynamic pricing model, full service mesh observability, and chaos engineering — modeled after Uber's microservices architecture.",
+  tags:["DevOps","MLOps","Observability","DevSecOps","GitOps"],
+  usecase:"Build the backend for a ride-hailing platform: driver location streaming, rider-driver matching, dynamic surge pricing via ML, trip lifecycle management, and payments. Simulate 5000 concurrent rides using K6 or Locust.",
+  arch:[
+    {layer:"Real-Time Location",detail:"Driver apps push GPS events to Kafka (driver-locations topic). Geo-indexing service (H3 library) maintains Redis GeoSet of active drivers per hex cell."},
+    {layer:"Matching Service",detail:"FastAPI matching service: given rider location, queries Redis GeoSet, ranks nearby drivers by ETA (OSRM routing). ML model scores driver acceptance probability."},
+    {layer:"Dynamic Pricing",detail:"Surge pricing ML model (XGBoost): features = demand/supply ratio per H3 cell, weather, time-of-day. Served via FastAPI. Retrained daily via Airflow."},
+    {layer:"Trip Lifecycle",detail:"PostgreSQL state machine: REQUESTED → MATCHED → IN_PROGRESS → COMPLETED. Events emitted to Kafka on each state transition. Saga pattern for payment coordination."},
+    {layer:"Service Mesh",detail:"Istio: mTLS, traffic management (weighted routing for surge model A/B), circuit breakers, retry policies. Kiali dashboard for service topology."},
+    {layer:"Observability",detail:"OpenTelemetry traces across all services. Custom metrics: matching_latency_ms, surge_multiplier_p99, driver_availability_ratio. Grafana SLO dashboards."},
+    {layer:"Security",detail:"Vault for DB credentials. JWT auth via auth-service. OPA: trip data access scoped to owning rider/driver. Trivy+SonarQube in CI. Falco for data exfiltration detection."}
+  ],
+  cicd:["GitHub Actions on push","pytest (unit) + integration tests with TestContainers","SonarQube SAST + dependency check","Trivy image scan","Helm linting + OPA conftest","Build image → push to registry","ArgoCD deploy to staging","K6 load test: 1000 simulated concurrent rides","Istio traffic split: 10% to new matching algorithm","SLO check: p99 matching latency < 500ms","ArgoCD Rollout promote to 100%"],
+  mlops:["Airflow: daily feature computation (H3 demand/supply ratios, historical acceptance rates)","Surge pricing model retrain: XGBoost on last 7 days, MLflow tracking","Driver acceptance model retrain: logistic regression, weekly","MLflow model registry: staging → prod gated by business metric (avg earnings per trip)","A/B test via Istio weight: old surge model vs new, measure trip completion rate","Evidently: monitor surge multiplier distribution drift","ETA model: OSRM + ML correction factor, retrained on actual trip durations"],
+  monitoring:"Grafana SLO dashboards: ride completion rate, p99 matching time, surge accuracy, driver supply index. Kiali service mesh topology. Alertmanager: page on matching SLA breach. Business metrics dashboard: rides/hour, avg surge, cancellation rate.",
+  repos:["uber/h3 (⭐5.2k) — geo indexing","apache/kafka (⭐28k)","istio/istio (⭐36k)","argoproj/argo-rollouts (⭐2.7k)","evidentlyai/evidently (⭐5k)"],
+  scaling:"KEDA: scale matching pods on Kafka consumer lag. Geo-sharding: separate Kafka partitions per city. Redis Cluster for driver location. HPA on surge pricing service. Karpenter spot nodes for batch ML.",
+  dr:"Kafka min.insync.replicas=2. PostgreSQL streaming replication. Redis AOF + RDB. Multi-AZ EKS. Circuit breakers via Istio. Graceful degradation: fallback to static pricing if ML service down.",
+  resume:"Maps to: Backend Platform Engineer, MLOps Engineer roles at Uber, Lyft, DoorDash, Bolt. Shows: real-time systems, geo-spatial ML, service mesh, event-driven architecture.",
+  demo:"Show Kiali service mesh live. Run K6 load test. Watch surge pricing ML adjust in real-time on Grafana. Trigger circuit breaker. Show Istio A/B split for new model.",
+  finops:"Spot nodes for Airflow+Kafka workers. Reserved capacity for PostgreSQL/Redis. Kubecost: cost per ride computed as custom metric. H3 cell demand routing reduces ML compute cost."
+},
+{
+  num:"05",title:"E-Commerce Microservices Platform",
+  subtitle:"A production-like e-commerce backend with 10+ microservices, event sourcing, search, personalized recommendations, chaos engineering, and full GitOps — modeled after Amazon/Shopify internals.",
+  tags:["DevOps","DevSecOps","Observability","GitOps","MLOps"],
+  usecase:"Build a fully operational e-commerce backend: product catalog, search, cart, orders, inventory, payments, notifications, reviews, and ML-powered recommendations. Run realistic load tests and chaos experiments.",
+  arch:[
+    {layer:"Microservices (10+)",detail:"product-service, search-service (Elasticsearch), cart-service, order-service, inventory-service, payment-service, notification-service, review-service, recommendation-service, user-service. Each has own DB."},
+    {layer:"Event Sourcing",detail:"All state changes emitted to Kafka. Order saga: order-placed → inventory-reserved → payment-processed → shipped. Kafka Streams for real-time inventory updates."},
+    {layer:"Search & Discovery",detail:"Elasticsearch for product catalog. Logstash pipeline syncs PostgreSQL → ES. ML re-ranking layer: FastAPI reranks search results using LambdaMART."},
+    {layer:"Recommendations",detail:"Collaborative filtering (ALS via PySpark) runs weekly on MinIO data lake. Results cached in Redis. FastAPI serves /recommend endpoint. MLflow tracks model versions."},
+    {layer:"API Gateway",detail:"Nginx Ingress + Kong API Gateway: rate limiting, auth, request routing. Istio service mesh for internal mTLS and observability."},
+    {layer:"Security",detail:"Vault: DB passwords, payment API keys. OPA: cart access scoped to user. Kyverno: all pods run as non-root. Trivy+SonarQube in CI. PCI-like controls on payment-service namespace."},
+    {layer:"Chaos Engineering",detail:"LitmusChaos experiments: pod kill, network partition, high CPU. Run weekly in staging. Chaos results feed into Grafana dashboard."}
+  ],
+  cicd:["Monorepo: GitHub Actions detects changed service","Run service-specific tests + contract tests (Pact)","SonarQube SAST per service","Trivy image scan — block on HIGH+","OPA conftest: Helm chart policy check","Build image → push to ECR per service","ArgoCD ApplicationSet deploys changed services","Contract test suite in staging","K6 load test on order flow","LitmusChaos: inject pod failure, verify recovery","Argo Rollouts canary to prod"],
+  mlops:["Weekly PySpark job on MinIO: compute item-item similarity matrix","ALS collaborative filtering model retrained on purchase history","MLflow: log NDCG@10, precision@5, coverage metrics","LambdaMART search re-ranking: Airflow weekly retrain","A/B test: baseline ranking vs ML re-ranking via Istio traffic split","Evidently: monitor recommendation click-through rate drift","Airflow DAG: nightly ETL from PostgreSQL services → MinIO data lake"],
+  monitoring:"Per-service Grafana dashboards. ORDER flow SLO: 99.9% orders placed in <2s. Inventory accuracy dashboard. Kafka consumer lag alerts. LitmusChaos results annotated in Grafana. Business metrics: GMV/hour, cart abandonment rate, search click-through.",
+  repos:["GoogleCloudPlatform/microservices-demo (⭐17.5k)","LitmusChaos/litmus (⭐4.5k)","elastic/elasticsearch (⭐70k)","argoproj/argo-cd (⭐18k)","apache/kafka (⭐28k)"],
+  scaling:"Per-service HPA. KEDA on Kafka-consuming services. Elasticsearch auto-scaling via ECK operator. Redis Cluster for cart/session. Read replicas per service DB. CDN for static assets.",
+  dr:"Kafka replication factor 3. Per-service DB with streaming replication. Velero cluster backup. Saga compensation transactions for order rollback. LitmusChaos validates DR scenarios weekly.",
+  resume:"Maps to: Backend Platform Engineer, DevOps Engineer at e-commerce companies (Amazon, Shopify, Zalando). Demonstrates: event sourcing, chaos engineering, microservices at scale.",
+  demo:"Show LitmusChaos killing order-service pod — watch order saga compensate via Kafka. Show search re-ranking A/B test in Grafana. Demo ArgoCD sync of changed service only.",
+  finops:"Kubecost: cost per service, cost per order. Spot nodes for search indexing + ML batch. Reserved capacity for order/payment DB. Right-sizing alerts via Kubecost."
+},
+{
+  num:"06",title:"AI Model Serving & Drift Monitoring Platform",
+  subtitle:"A production ML platform for deploying, versioning, A/B testing, and monitoring multiple ML models at scale — modeled after Uber Michelangelo and LinkedIn Feathr.",
+  tags:["MLOps","DevOps","Observability","DevSecOps","GitOps"],
+  usecase:"Build the internal ML platform that data scientists use: submit a model → it gets containerized, scanned, deployed with shadow mode, A/B tested, monitored for drift, and auto-retrained. Support 5+ concurrent model serving endpoints.",
+  arch:[
+    {layer:"Model Registry",detail:"MLflow Model Registry: version control for all models. Staging/Production/Archived stages. S3/MinIO artifact store. PostgreSQL backend for metadata."},
+    {layer:"Model Serving",detail:"FastAPI inference servers per model type. BentoML for model packaging. Triton Inference Server for GPU models. Each server exposes /predict, /health, /metrics endpoints."},
+    {layer:"Feature Store",detail:"Feast feature store: offline features in PostgreSQL, online features in Redis. Airflow DAG materializes features from raw data lake (MinIO/S3) on schedule."},
+    {layer:"Experiment Tracking",detail:"MLflow: log params, metrics, artifacts. Optuna for hyperparameter tuning. Results compared in MLflow UI. Automated model selection by primary metric."},
+    {layer:"Drift Monitoring",detail:"Evidently AI: data drift (KS test, PSI), concept drift (target drift). Reports generated hourly. Prometheus metrics exported. Grafana annotations on drift events."},
+    {layer:"A/B Testing",detail:"Istio traffic splitting for champion/challenger. Custom Prometheus metrics track business KPIs per model variant. Automated statistical significance testing via SciPy."},
+    {layer:"Security",detail:"All model artifacts scanned with custom script (pickle safety check). Vault for API keys. OPA: model deployment requires security review label in MLflow. Trivy on serving images."}
+  ],
+  cicd:["Data scientist pushes model code to Git","GitHub Actions: run model tests (unit + performance benchmark)","SonarQube SAST on training code","Trivy scan on inference container image","OPA: model card completeness check (fairness metrics required)","Automated model training run → MLflow tracking","Performance gate: must beat baseline by >2%","Deploy to shadow mode: log predictions, no action","Champion/Challenger split: 10% traffic via Istio","Statistical significance check (p<0.05): automated promotion","Drift monitoring Evidently job scheduled in Airflow","Auto-rollback trigger if drift score > threshold"],
+  mlops:["Feast: offline feature pipeline (Airflow) + online materialization","MLflow experiment tracking for all training runs","Optuna: automated hyperparameter search","Model registry promotion workflow: Draft → Staging → Production","Evidently AI: hourly drift checks, weekly comprehensive reports","Automated retraining trigger: drift alert → Airflow DAG","SHAP explainability: computed at serving time, logged to Loki","Model monitoring dashboard: accuracy over time, data drift scores, prediction distribution"],
+  monitoring:"Grafana: model latency p50/p99/p999, prediction throughput, drift score timeline, A/B test business metric comparison, feature store freshness. Custom Prometheus: model_predictions_total, drift_score_gauge, feature_staleness_seconds.",
+  repos:["mlflow/mlflow (⭐19.5k)","evidentlyai/evidently (⭐5k)","feast-dev/feast (⭐5.5k)","bentoml/bentoml (⭐7k)","optuna/optuna (⭐10k)"],
+  scaling:"KEDA: scale inference pods on request rate (custom metric). GPU node pool with time-based scaling (scale down at night). Feast online store Redis Cluster. MLflow artifact store on S3 with lifecycle policies.",
+  dr:"MLflow artifact store on versioned S3. PostgreSQL MLflow backend with streaming replication. ArgoCD self-heal for serving deployments. Feature store Redis AOF persistence. Model rollback in <1min via MLflow Registry API.",
+  resume:"Most direct path to MLOps Engineer roles at any AI-first company. Shows: feature stores, drift monitoring, A/B testing infrastructure, model lifecycle management. Maps to Uber ML Platform, LinkedIn AI, DoorDash ML.",
+  demo:"Live: push new model version → watch CI run → shadow mode activate → A/B split in Grafana → inject data drift → watch Evidently alert → auto-retrain trigger in Airflow.",
+  finops:"GPU spot instances for training. CPU serving instances right-sized by Kubecost. Model serving cost per prediction tracked as Prometheus metric. Idle GPU detection → auto-scale-down."
+},
+{
+  num:"07",title:"Multi-Cloud GitOps Control Plane",
+  subtitle:"A unified GitOps control plane managing workloads across AWS + GCP + Azure simultaneously, with policy enforcement, cost federation, and drift detection — modeled after CNCF multi-cloud patterns.",
+  tags:["GitOps","DevOps","DevSecOps","Observability"],
+  usecase:"Build the control plane that enterprise platform teams build: a single Git repository that manages clusters across 3 cloud providers. Policy violations in any cluster are detected and remediated automatically. Cost is aggregated across all clouds.",
+  arch:[
+    {layer:"Git as Truth",detail:"Monorepo structure: /clusters/aws-prod, /clusters/gcp-staging, /clusters/azure-dev. Cluster-specific Kustomize overlays. ArgoCD ApplicationSets per cluster."},
+    {layer:"Fleet Management",detail:"ArgoCD fleet: Hub cluster (management) manages spoke clusters (AWS EKS, GCP GKE, Azure AKS) via ArgoCD cluster secrets. FluxCD as alternative on GCP cluster for comparison."},
+    {layer:"Policy Federation",detail:"OPA Gatekeeper ConstraintTemplates deployed to all clusters via ArgoCD. Kyverno policies for image allowlist, resource limits, label requirements. Central policy repo."},
+    {layer:"Multi-Cloud IaC",detail:"Terraform: separate state per cloud (S3/GCS/Azure Blob). Terragrunt for DRY configs. Crossplane for cloud resources via K8s CRDs (databases, buckets). Atlantis for PR-based apply."},
+    {layer:"Cost Federation",detail:"Kubecost federation: aggregates costs from all 3 clusters. Custom Grafana dashboard: cost per workload across clouds. AWS Cost Explorer + GCP Billing + Azure Cost API unified via Python ETL."},
+    {layer:"Security Posture",detail:"Falco deployed via DaemonSet to all clusters. Alerts federated to central Alertmanager. Vault cluster per cloud, Vault Replication for secrets sync. Central SonarQube + Trivy registry."},
+    {layer:"Observability Federation",detail:"Thanos: federated Prometheus across all clusters. Central Grafana with multi-cluster datasource. Loki federation. OpenTelemetry Collector in each cluster ships to central Tempo."}
+  ],
+  cicd:["PR to cluster config repo","GitHub Actions: Terraform plan (all 3 clouds in parallel)","OPA conftest: policy check on all Kustomize overlays","Atlantis comments Terraform plan on PR","ArgoCD diff preview comment on PR","Merge → Atlantis auto-apply to dev cluster","Manual gate → staging apply","Kubecost budget check: does this change exceed cost budget?","Manual gate → prod apply (requires 2 approvers)","ArgoCD ApplicationSet syncs to all prod clusters","Thanos: verify metrics flowing from new resources"],
+  mlops:["ML workloads deployed to cheapest cloud via GitOps cost-aware placement","Airflow deployed on AWS cluster, jobs can submit to GCP GKE for GPU","MLflow central server on AWS, artifact stores per cloud","Model serving: blue clusters (AWS) for prod, green (GCP) for canary","Cross-cluster A/B test via global load balancer traffic split"],
+  monitoring:"Thanos Query: unified metrics view across all clusters. Central Grafana: cluster health matrix, policy violation heat map, cost by cloud/namespace/team. Falco alerts from all clusters → central Alertmanager → PagerDuty.",
+  repos:["argoproj/argo-cd (⭐18k)","fluxcd/flux2 (⭐6.3k)","crossplane/crossplane (⭐9.6k)","thanos-io/thanos (⭐13k)","gruntwork-io/terragrunt (⭐8k)"],
+  scaling:"Each spoke cluster autoscales independently. Karpenter on AWS, GKE autopilot on GCP. Thanos compaction for long-term metrics. Central ArgoCD hub scales with ApplicationSets.",
+  dr:"GitOps = instant cluster rebuild from Git. Crossplane recreates cloud resources. Vault replication. Thanos long-term storage on S3. Per-cloud disaster recovery runbooks tested quarterly via GameDay.",
+  resume:"Most impressive architecture project for Senior DevOps/Platform Engineer roles. Shows: multi-cloud operations, fleet management, policy at scale, FinOps. Maps to Platform Lead roles at large enterprises.",
+  demo:"Show ArgoCD fleet dashboard with 3 clusters. Make a policy violation → watch Gatekeeper reject in all 3. Show Thanos federated dashboard. Show Kubecost multi-cloud cost breakdown.",
+  finops:"Cross-cloud workload placement optimization. Spot/preemptible usage per cloud. Reserved instance recommendations per cluster. Budget alerts in Kubecost. Cost anomaly detection via custom Prometheus rules."
+},
+{
+  num:"08",title:"Kubernetes Self-Service Platform Engineering",
+  subtitle:"A full Kubernetes platform with namespace-as-a-service, self-service provisioning via CRDs, admission webhooks, and a developer portal — modeled after Crossplane + Platform Engineering patterns.",
+  tags:["DevOps","DevSecOps","GitOps","Observability"],
+  usecase:"Build the platform that K8s operators build at enterprises: developers request a 'project' (namespace + RBAC + quotas + network policies + Vault path + ArgoCD app) via a single YAML or UI, and get everything provisioned in minutes.",
+  arch:[
+    {layer:"Custom Resource Definitions",detail:"Project CRD: spec includes team, environment, budget, services needed. DevWorkspace CRD for developer environments. Custom Operator (Kubebuilder) reconciles Project → namespace, RBAC, quotas, NetworkPolicy."},
+    {layer:"Admission Control",detail:"Mutating webhook: auto-inject Vault agent sidecar, add standard labels, set default resource limits. Validating webhook: reject if no owner label, reject if image not from approved registry."},
+    {layer:"Self-Service UI",detail:"Backstage + custom plugin: submit Project CRD via form. Crossplane compositions: claim a PostgreSQL → provisions RDS via AWS provider. K8s-native database provisioning."},
+    {layer:"Namespace Lifecycle",detail:"Operator manages: create namespace → apply RBAC → create ResourceQuota → create NetworkPolicy (default deny) → create Vault policy → create ArgoCD project → notify team via Slack."},
+    {layer:"Observability Per Namespace",detail:"Grafana Loki label enforcement: all logs tagged with namespace/team/project. Per-namespace Grafana dashboard auto-generated via Grafonnet/Jsonnet. Kubecost namespace cost breakdown."},
+    {layer:"Security Hardening",detail:"PodSecurity admission: Restricted profile for all prod namespaces. NetworkPolicy: default deny, explicit allow. Vault: per-namespace secret path. OPA: no cluster-admin for developers. Falco per namespace alerting."},
+    {layer:"GitOps Integration",detail:"Operator creates ArgoCD Application per Project CRD. Developers push code → ArgoCD deploys to their namespace only. ArgoCD RBAC: scoped to project. Flux image automation per team."}
+  ],
+  cicd:["Developer submits Project CRD via Backstage UI or kubectl","Validating webhook: check budget approval, team exists","Operator reconciles: full namespace stack provisioned","Operator creates ArgoCD Application scoped to namespace","Developer pushes first service: standard CI pipeline","ArgoCD deploys to team namespace","Kubecost budget alert configured automatically","Grafana dashboard auto-provisioned via configmap","PodSecurity policy enforced by admission webhook","Monthly: operator detects idle namespaces → Slack warning → auto-archive"],
+  mlops:["DataScience Project CRD: provisions JupyterHub namespace + GPU quota + MLflow project + S3 bucket","Operator manages GPU node pool scaling based on active DataScience projects","MLflow per-project scoped to team namespace","Airflow namespace: each data team gets isolated Airflow environment via CRD","Model serving namespace: auto-provisioned with Triton/FastAPI template"],
+  monitoring:"Cluster-wide Grafana: namespace resource usage vs quotas, admission webhook decision log, operator reconciliation latency, Crossplane resource health. Kubecost: cost by Project CRD. Falco: anomaly per namespace.",
+  repos:["kubernetes-sigs/kubebuilder (⭐7.3k)","crossplane/crossplane (⭐9.6k)","open-policy-agent/gatekeeper (⭐3.6k)","kyverno/kyverno (⭐5.7k)","grafana/grafonnet-lib (⭐1.5k)"],
+  scaling:"Operator sharded by namespace prefix for large clusters. Webhook deployed as multiple replicas. Crossplane compositions handle 100+ cloud resources. ArgoCD ApplicationSets for fleet.",
+  dr:"CRD spec in Git: delete cluster, re-apply CRDs, operator recreates all namespaces. Crossplane recreates cloud resources. Velero for persistent volume backup.",
+  resume:"Extremely rare and impressive skill: custom Kubernetes operators. Maps to: Senior Platform Engineer, K8s Engineer, SRE roles at cloud-native companies. Operators are a major interview differentiator.",
+  demo:"Live: submit Project CRD via kubectl → watch operator create namespace/RBAC/ArgoCD app in real-time → deploy service via ArgoCD → show Kubecost namespace cost → trigger budget alert.",
+  finops:"Idle namespace detection + auto-archive. GPU quota enforcement via CRD spec. Kubecost namespace budgets linked to Project CRD billing team field. Cost-per-project report."
+},
+{
+  num:"09",title:"Data Pipeline & MLOps Lakehouse Platform",
+  subtitle:"A production data platform with a MinIO-based data lakehouse, multi-stage ETL, ML feature engineering, data quality gates, and full lineage tracking — modeled after Databricks/Snowflake patterns on open source.",
+  tags:["MLOps","DevOps","Observability","DevSecOps","GitOps"],
+  usecase:"Build an open-source data lakehouse: raw data lands in MinIO, goes through quality checks, gets transformed via dbt/Spark, lands in a feature store for ML, and powers dashboards. Full lineage from raw source to ML model prediction.",
+  arch:[
+    {layer:"Ingestion Layer",detail:"Kafka Connect (JDBC source connector) ingests from PostgreSQL transactional DBs → MinIO raw zone (Parquet/Delta format). Debezium CDC for change data capture. S3-compatible MinIO tiered storage."},
+    {layer:"Storage Zones",detail:"MinIO zones: raw (as-landed), bronze (cleaned), silver (transformed/joined), gold (business aggregates, ML features). Delta Lake format for ACID transactions on MinIO."},
+    {layer:"Transformation",detail:"dbt (data build tool): SQL-based transformation from bronze → silver → gold. Great Expectations: data quality tests per model. Airflow DAG orchestrates dbt runs daily."},
+    {layer:"Feature Engineering",detail:"PySpark jobs on K8s (Spark operator): compute ML features from silver layer. Feast materializes features: offline (PostgreSQL) + online (Redis). Feature lineage tracked via OpenLineage."},
+    {layer:"ML Training",detail:"Kubeflow Pipelines: feature extraction → training (XGBoost/scikit-learn) → evaluation → MLflow registration. Airflow triggers on new gold layer data availability."},
+    {layer:"Data Catalog & Lineage",detail:"Apache Atlas or OpenMetadata: data catalog, column-level lineage, data quality scores. OpenLineage: Airflow + Spark emit lineage events. Marquez server collects lineage graph."},
+    {layer:"Security & Governance",detail:"MinIO IAM policies: per-zone access control. Vault for MinIO credentials. dbt column-level masking for PII. OPA: prevent gold zone access without data steward approval."}
+  ],
+  cicd:["dbt model changes pushed to Git","GitHub Actions: dbt compile (syntax check)","dbt test: Great Expectations schema + data tests","SonarQube: SQL quality scan on dbt models","Trivy: scan Spark job images","Deploy dbt models to staging environment","Run dbt tests on staging data — fail if >5% data quality score drop","Airflow DAG update: staged via ArgoCD","Kubeflow pipeline update: new training run auto-triggered","MLflow: new model version registered if metrics improve","Data lineage graph updated in Marquez automatically"],
+  mlops:["OpenLineage: Airflow DAG run emits lineage events to Marquez","Feast: offline features refreshed nightly by Airflow","Kubeflow: model training on new gold layer data","MLflow: track all training runs, feature set versions, data versions","Great Expectations: data quality gate before feature computation","Evidently AI: monitor feature distribution drift daily","dbt exposures: document which ML models consume which dbt models"],
+  monitoring:"Grafana: Airflow DAG success rate, dbt test pass rate, data freshness (hours since last update), Kafka lag, MinIO storage usage by zone. Data SLAs: gold layer available by 6am. Alertmanager: DAG failure → PagerDuty.",
+  repos:["apache/airflow (⭐38k)","dbt-labs/dbt-core (⭐9.5k)","delta-io/delta (⭐7k)","OpenLineage/OpenLineage (⭐2k)","feast-dev/feast (⭐5.5k)"],
+  scaling:"Spark on K8s via Spark Operator: dynamic executor scaling. MinIO distributed mode: erasure coded, multi-node. Airflow CeleryExecutor with Redis broker. Feast online store Redis Cluster.",
+  dr:"MinIO erasure coding (survive 50% node loss). Delta Lake transaction log: time-travel and rollback. Airflow metadata DB PostgreSQL with streaming replication. Full pipeline replay from raw zone.",
+  resume:"Data Platform Engineer, MLOps Engineer, Data Engineer roles. Shows: end-to-end data pipeline ownership, data quality engineering, feature stores, lineage. Maps to Airbnb Data Platform, Spotify Luigi/Scio.",
+  demo:"Show MinIO zone pipeline in Grafana. Run dbt test that fails on bad data. Show data lineage in Marquez. Trigger Kubeflow pipeline on new data arrival. Show Feast feature freshness.",
+  finops:"MinIO tiering: warm data to cheap storage after 30 days. Spark spot executors via Karpenter. MinIO storage cost per zone dashboard. dbt model run cost tracked via Airflow metadata."
+},
+{
+  num:"10",title:"Zero-Trust Security & Compliance Platform",
+  subtitle:"A full zero-trust security platform for Kubernetes: runtime threat detection, policy-as-code, secrets management, vulnerability management, and automated compliance reporting — modeled after CNCF security architecture.",
+  tags:["DevSecOps","DevOps","Observability","GitOps"],
+  usecase:"Build the security platform that security engineers build at regulated industries: every workload is continuously scanned, every action is audited, every secret is rotated automatically, and compliance reports are generated on demand.",
+  arch:[
+    {layer:"Identity & Secrets",detail:"HashiCorp Vault: PKI CA for mTLS cert issuance (Istio integration). Dynamic secrets: PostgreSQL credentials rotated every 1hr. AppRole auth for CI/CD. K8s auth for pods. Vault Agent Injector via Kyverno auto-injection."},
+    {layer:"Policy as Code",detail:"OPA Gatekeeper: 20+ ConstraintTemplates (no latest tag, resource limits required, no privileged, approved registries only). Kyverno: image signing verification (Cosign), auto-label injection. Conftest in CI for pre-commit policy."},
+    {layer:"Runtime Security",detail:"Falco: 50+ custom rules. Detect: shell in container, sensitive file access, outbound connection to non-approved IP, privilege escalation, cryptomining. Alerts → Kafka → SIEM pipeline."},
+    {layer:"Vulnerability Management",detail:"Trivy Operator: continuous K8s cluster scanning. Reports stored as K8s CRDs. Grafana plugin shows CVE dashboard. SLA: Critical CVE patched in 24hr, High in 7 days. Auto-issue creation in GitHub."},
+    {layer:"Supply Chain Security",detail:"Cosign: sign all images in CI. Keyless signing via OIDC (GitHub Actions OIDC token). Kyverno policy: verify signature before admission. SBOM generation (Syft) per image, stored in OCI registry."},
+    {layer:"Audit & Compliance",detail:"K8s audit logs → Loki. Vault audit log → Loki. Falco alerts → Kafka → Elasticsearch. Automated compliance report: generate CIS K8s Benchmark, SOC2 control evidence via kube-bench. Reports to PDF via Python."},
+    {layer:"Network Security",detail:"Cilium CNI: eBPF-based network policies. L7 policy (HTTP path-level). Network flow visibility. Hubble UI for real-time traffic map. Egress control: only approved external endpoints."}
+  ],
+  cicd:["Pre-commit: conftest OPA policy check on all YAML","GitHub Actions: Trivy image scan (block on CRITICAL)","Syft: generate SBOM for image","Cosign: sign image with GitHub Actions OIDC (keyless)","SonarQube SAST + secret scanning (Gitleaks)","Kyverno: verify image signature at admission","OPA Gatekeeper: validate deployment spec","Deploy to staging: kube-bench CIS scan post-deploy","Falco baseline: no unexpected alerts in 5min window","Vault: verify dynamic secrets rotation working","Compliance report generated and archived"],
+  mlops:["ML model images: signed via Cosign, SBOM generated","Training data: integrity hash stored in Vault for audit","MLflow access: Vault dynamic credentials, rotated per training run","Model serving: Vault PKI cert for mTLS to inference endpoint","Compliance: all model predictions auditable via OpenTelemetry trace ID"],
+  monitoring:"Grafana security dashboard: CVE count by severity/namespace, OPA violation rate, Falco alert frequency by rule, Vault secret rotation success rate, image signing compliance %. Alertmanager: Critical CVE → immediate PagerDuty. Falco alert → Slack #security-alerts.",
+  repos:["falcosecurity/falco (⭐7.5k)","aquasecurity/trivy (⭐24k)","sigstore/cosign (⭐4.4k)","cilium/cilium (⭐20k)","open-policy-agent/opa (⭐9.4k)"],
+  scaling:"Falco DaemonSet on all nodes. Trivy Operator: distributed scanning. OPA Gatekeeper: HA deployment (3 replicas). Vault: HA with integrated storage (Raft). Cilium: scales with node count.",
+  dr:"Vault Raft auto-failover. GitOps: all policies in Git, re-apply instantly. Falco rules versioned in Git. OPA policies versioned. Compliance report regeneratable from audit log archive in S3.",
+  resume:"Highest-value project for DevSecOps Engineer, Security Engineer, SRE roles. Rare combination of runtime security + supply chain security + policy-as-code. Maps to: Cloudflare, HashiCorp, Palo Alto, financial institutions.",
+  demo:"Live: try to deploy image without Cosign signature → Kyverno rejects. Run privileged container → Falco alerts in <1s. Show Trivy CVE dashboard. Generate on-demand CIS compliance report. Show Hubble network flow map.",
+  finops:"Trivy scans prioritized: Critical/High CVEs only in prod scan. Falco rule tuning to reduce alert noise (cost of human response). Kubecost: security tooling cost per cluster. Vault lease TTL optimization."
+}
+];
+
+const tabNames=["Overview","Architecture","CI/CD","MLOps","Monitoring","Repos","Impact"];
+const tagMap={DevOps:"b-devops",DevSecOps:"b-devsec",MLOps:"b-mlops",GitOps:"b-gitops",Observability:"b-obs"};
+let cur=0, curTab=0;
+
+function renderList(){
+  document.getElementById('rlist').innerHTML=projects.map((p,i)=>`
+    <button class="r-btn${i===0?' active':''}" onclick="loadProj(${i})">
+      <span class="r-num">${p.num}</span>${p.title}
+      <span class="r-tags">${p.tags.join(' · ')}</span>
+    </button>`).join('');
+}
+
+function loadProj(i){
+  cur=i; curTab=0;
+  document.querySelectorAll('.r-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
+  renderMain();
+}
+
+function switchTab(i){
+  curTab=i;
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
+  document.querySelectorAll('.tc').forEach((c,j)=>c.classList.toggle('on',j===i));
+}
+
+function renderMain(){
+  const p=projects[cur];
+  document.getElementById('main').innerHTML=`
+    <div class="repo-header">
+      <div class="badge-row">${p.tags.map(t=>`<span class="badge ${tagMap[t]||'b-obs'}">${t}</span>`).join('')}</div>
+      <div class="proj-title">${p.title}</div>
+      <div class="proj-subtitle">${p.subtitle}</div>
+    </div>
+    <div class="tabs">
+      ${tabNames.map((t,i)=>`<button class="tab${i===0?' on':''}" onclick="switchTab(${i})">${t}</button>`).join('')}
+    </div>
+    <div class="tc on">
+      <div class="lbl">Business use case</div>
+      <div class="card">${p.usecase}</div>
+      <div class="lbl">Scaling strategy</div>
+      <div class="card">${p.scaling}</div>
+      <div class="lbl">Disaster recovery</div>
+      <div class="card">${p.dr}</div>
+      <div class="lbl">FinOps & cost optimization</div>
+      <div class="card">${p.finops}</div>
+    </div>
+    <div class="tc">
+      <div class="lbl">Architecture layers</div>
+      ${p.arch.map(a=>`<div class="card"><strong>${a.layer}</strong><br>${a.detail}</div>`).join('')}
+    </div>
+    <div class="tc">
+      <div class="lbl">CI/CD pipeline stages</div>
+      ${p.cicd.map((s,i)=>`<div class="step"><div class="sn">${i+1}</div><div class="st">${s}</div></div>`).join('')}
+    </div>
+    <div class="tc">
+      <div class="lbl">MLOps lifecycle</div>
+      ${p.mlops.map((s,i)=>`<div class="step"><div class="sn">${i+1}</div><div class="st">${s}</div></div>`).join('')}
+    </div>
+    <div class="tc">
+      <div class="lbl">Monitoring strategy</div>
+      <div class="card">${p.monitoring}</div>
+    </div>
+    <div class="tc">
+      <div class="lbl">GitHub inspirations</div>
+      ${p.repos.map(r=>`<div class="card">⭐ ${r}</div>`).join('')}
+    </div>
+    <div class="tc">
+      <div class="lbl">Resume & job market impact</div>
+      <div class="hl"><p>${p.resume}</p></div>
+      <div class="lbl">Interview demo script</div>
+      <div class="card">${p.demo}</div>
+    </div>
+  `;
+  document.querySelectorAll('.tab').forEach((t,i)=>t.addEventListener('click',()=>switchTab(i)));
+}
+
+renderList();
+renderMain();
+</script>
+</body>
+</html>
